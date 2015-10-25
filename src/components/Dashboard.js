@@ -10,10 +10,6 @@ import TrackPreview from './TrackPreview';
 
 class Dashboard extends Component {
   componentDidMount() {
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //   this.props.addLocation(position);
-    // })
-
   }
 
   render() {

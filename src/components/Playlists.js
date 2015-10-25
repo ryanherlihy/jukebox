@@ -27,7 +27,6 @@ class Playlists extends Component {
       })
     }
 
-    console.log('play', this.props.currentPlaylist);
     let rightContent;
     if (this.props.currentPlaylist) {
       rightContent = (

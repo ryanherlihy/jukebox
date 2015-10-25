@@ -79,7 +79,7 @@
 
 	var _componentsApp2 = _interopRequireDefault(_componentsApp);
 
-	var _componentsDashboard = __webpack_require__(227);
+	var _componentsDashboard = __webpack_require__(229);
 
 	var _componentsPlaylists = __webpack_require__(235);
 
@@ -25333,7 +25333,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Navigation = __webpack_require__(226);
+	var _actionsJukeActions = __webpack_require__(226);
+
+	var _Navigation = __webpack_require__(228);
 
 	var _Navigation2 = _interopRequireDefault(_Navigation);
 
@@ -25347,6 +25349,11 @@
 	  }
 
 	  _createClass(App, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      (0, _actionsJukeActions.getLocation)();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2['default'].createElement(
@@ -25377,203 +25384,6 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(159);
-
-	var Navigation = (function (_Component) {
-	  _inherits(Navigation, _Component);
-
-	  function Navigation() {
-	    _classCallCheck(this, Navigation);
-
-	    _get(Object.getPrototypeOf(Navigation.prototype), 'constructor', this).apply(this, arguments);
-	  }
-
-	  _createClass(Navigation, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2['default'].createElement(
-	        'nav',
-	        { className: 'nav-wrapper indigo' },
-	        _react2['default'].createElement(
-	          'ul',
-	          { className: 'right hide-on-med-and-down' },
-	          _react2['default'].createElement(
-	            'li',
-	            null,
-	            _react2['default'].createElement(
-	              _reactRouter.Link,
-	              { to: '/playlists' },
-	              'Playlists'
-	            )
-	          ),
-	          _react2['default'].createElement(
-	            'li',
-	            null,
-	            _react2['default'].createElement(
-	              _reactRouter.Link,
-	              { to: '/' },
-	              'Create Playlist'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Navigation;
-	})(_react.Component);
-
-	exports['default'] = Navigation;
-	module.exports = exports['default'];
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Navigation.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 227 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(215);
-
-	var _actionsJukeActions = __webpack_require__(228);
-
-	var jukeActions = _interopRequireWildcard(_actionsJukeActions);
-
-	var _TrackList = __webpack_require__(230);
-
-	var _TrackList2 = _interopRequireDefault(_TrackList);
-
-	var _Selected = __webpack_require__(233);
-
-	var _Selected2 = _interopRequireDefault(_Selected);
-
-	var _TrackPreview = __webpack_require__(234);
-
-	var _TrackPreview2 = _interopRequireDefault(_TrackPreview);
-
-	var Dashboard = (function (_Component) {
-	  _inherits(Dashboard, _Component);
-
-	  function Dashboard() {
-	    _classCallCheck(this, Dashboard);
-
-	    _get(Object.getPrototypeOf(Dashboard.prototype), 'constructor', this).apply(this, arguments);
-	  }
-
-	  _createClass(Dashboard, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // navigator.geolocation.getCurrentPosition((position) => {
-	      //   this.props.addLocation(position);
-	      // })
-
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-
-	      var rightContent = undefined;
-	      if (this.props.currentTrack) {
-	        rightContent = _react2['default'].createElement(_TrackPreview2['default'], {
-	          track: this.props.currentTrack,
-	          addSelected: this.props.addSelected });
-	      } else {
-	        rightContent = _react2['default'].createElement(_Selected2['default'], {
-	          selected: this.props.selected,
-	          loc: this.props.currentLocation,
-	          addSavedPlaylist: this.props.addSavedPlaylist });
-	      }
-
-	      return _react2['default'].createElement(
-	        'div',
-	        { className: 'container', style: { marginTop: 20 } },
-	        _react2['default'].createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2['default'].createElement(
-	            'div',
-	            { className: 'col m6 s12' },
-	            _react2['default'].createElement(_TrackList2['default'], {
-	              results: this.props.results,
-	              fetchTracks: this.props.fetchTracks,
-	              addCurrentTrack: this.props.addCurrentTrack })
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { className: 'col m6 s12' },
-	            rightContent
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Dashboard;
-	})(_react.Component);
-
-	function mapStateToProps(state) {
-	  return {
-	    results: state.results,
-	    selected: state.selected,
-	    saved: state.saved,
-	    currentTrack: state.currentTrack
-	  };
-	}
-
-	var DashboardContainer = (0, _reactRedux.connect)(mapStateToProps, jukeActions)(Dashboard);
-	exports.DashboardContainer = DashboardContainer;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Dashboard.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
 	exports.initSaved = initSaved;
 	exports.addResults = addResults;
 	exports.addSelected = addSelected;
@@ -25588,7 +25398,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _firebase = __webpack_require__(229);
+	var _firebase = __webpack_require__(227);
 
 	var _firebase2 = _interopRequireDefault(_firebase);
 
@@ -25636,6 +25446,7 @@
 	}
 
 	function addLocation(location) {
+	  console.log(location);
 	  return {
 	    type: 'ADD_LOCATION',
 	    location: location
@@ -25677,11 +25488,9 @@
 	}
 
 	function getLocation() {
-	  return function (dispatch) {
-	    return navigator.geolocation.getCurrentPosition(function (position) {
-	      dispatch(addLocation(position));
-	    });
-	  };
+	  return navigator.geolocation.getCurrentPosition(function (position) {
+	    dispatch(addLocation(position));
+	  });
 	}
 
 	// fireBaseRef.on('value', function(snapshot) {
@@ -25693,7 +25502,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "jukeActions.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 229 */
+/* 227 */
 /***/ function(module, exports) {
 
 	/*! @license Firebase v2.3.1
@@ -25966,6 +25775,198 @@
 
 	module.exports = Firebase;
 
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	var Navigation = (function (_Component) {
+	  _inherits(Navigation, _Component);
+
+	  function Navigation() {
+	    _classCallCheck(this, Navigation);
+
+	    _get(Object.getPrototypeOf(Navigation.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(Navigation, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'nav',
+	        { className: 'nav-wrapper indigo' },
+	        _react2['default'].createElement(
+	          'ul',
+	          { className: 'right hide-on-med-and-down' },
+	          _react2['default'].createElement(
+	            'li',
+	            null,
+	            _react2['default'].createElement(
+	              _reactRouter.Link,
+	              { to: '/playlists' },
+	              'Playlists'
+	            )
+	          ),
+	          _react2['default'].createElement(
+	            'li',
+	            null,
+	            _react2['default'].createElement(
+	              _reactRouter.Link,
+	              { to: '/' },
+	              'Create Playlist'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Navigation;
+	})(_react.Component);
+
+	exports['default'] = Navigation;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Navigation.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(215);
+
+	var _actionsJukeActions = __webpack_require__(226);
+
+	var jukeActions = _interopRequireWildcard(_actionsJukeActions);
+
+	var _TrackList = __webpack_require__(230);
+
+	var _TrackList2 = _interopRequireDefault(_TrackList);
+
+	var _Selected = __webpack_require__(233);
+
+	var _Selected2 = _interopRequireDefault(_Selected);
+
+	var _TrackPreview = __webpack_require__(234);
+
+	var _TrackPreview2 = _interopRequireDefault(_TrackPreview);
+
+	var Dashboard = (function (_Component) {
+	  _inherits(Dashboard, _Component);
+
+	  function Dashboard() {
+	    _classCallCheck(this, Dashboard);
+
+	    _get(Object.getPrototypeOf(Dashboard.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(Dashboard, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      var rightContent = undefined;
+	      if (this.props.currentTrack) {
+	        rightContent = _react2['default'].createElement(_TrackPreview2['default'], {
+	          track: this.props.currentTrack,
+	          addSelected: this.props.addSelected });
+	      } else {
+	        rightContent = _react2['default'].createElement(_Selected2['default'], {
+	          selected: this.props.selected,
+	          loc: this.props.currentLocation,
+	          addSavedPlaylist: this.props.addSavedPlaylist });
+	      }
+
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: 'container', style: { marginTop: 20 } },
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'col m6 s12' },
+	            _react2['default'].createElement(_TrackList2['default'], {
+	              results: this.props.results,
+	              fetchTracks: this.props.fetchTracks,
+	              addCurrentTrack: this.props.addCurrentTrack })
+	          ),
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'col m6 s12' },
+	            rightContent
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Dashboard;
+	})(_react.Component);
+
+	function mapStateToProps(state) {
+	  return {
+	    results: state.results,
+	    selected: state.selected,
+	    saved: state.saved,
+	    currentTrack: state.currentTrack
+	  };
+	}
+
+	var DashboardContainer = (0, _reactRedux.connect)(mapStateToProps, jukeActions)(Dashboard);
+	exports.DashboardContainer = DashboardContainer;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Dashboard.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 230 */
@@ -26454,7 +26455,7 @@
 
 	var _reactRedux = __webpack_require__(215);
 
-	var _actionsJukeActions = __webpack_require__(228);
+	var _actionsJukeActions = __webpack_require__(226);
 
 	var jukeActions = _interopRequireWildcard(_actionsJukeActions);
 
@@ -26498,7 +26499,6 @@
 	        });
 	      }
 
-	      console.log('play', this.props.currentPlaylist);
 	      var rightContent = undefined;
 	      if (this.props.currentPlaylist) {
 	        rightContent = _react2['default'].createElement(

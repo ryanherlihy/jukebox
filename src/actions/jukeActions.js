@@ -44,6 +44,7 @@ export function clearSelected() {
 }
 
 export function addLocation(location) {
+  console.log(location);
   return {
     type: 'ADD_LOCATION',
     location
@@ -85,6 +86,7 @@ export function addSavedPlaylist(title, playlist, loc) {
 }
 
 export function getLocation() {
+  console.log('start');
   return function(dispatch) {
     return navigator.geolocation.getCurrentPosition(function(position) {
       dispatch(addLocation(position));
