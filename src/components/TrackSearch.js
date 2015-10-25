@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
 
 class TrackSearch extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      type: ''
-    }
-  }
 
   handleSearch() {
+    console.log(this.props);
     if (this.searchBox.value) {
-      this.props.addResults(this.searchBox.value)
+      this.props.fetchTracks(this.searchBox.value)
     }
     this.searchBox.value = '';
   }

@@ -6,20 +6,22 @@ import Result from './Result';
 class TrackList extends Component {
 
   render() {
-    let results = this.props.results.map((item, index) => {
-      console.log(item);
-      return (
-        <Result
-          key={index}
-          item={item}
-          addCurrentTrack={this.props.addCurrentTrack} />
-      )
-    });
+    let results
+    if (this.props.results) {
+      results = this.props.results.map((item, index) => {
+        return (
+          <Result
+            key={index}
+            item={item}
+            addCurrentTrack={this.props.addCurrentTrack} />
+        )
+      });
+    }
 
     return (
       <div className='card'>
         <div className='card-content'>
-          <TrackSearch addResults={this.props.addResults}/>
+          <TrackSearch fetchTracks={this.props.fetchTracks}/>
           <ul style={{marginTop: 10}}>
             {results}
           </ul>

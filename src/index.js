@@ -3,14 +3,29 @@ import ReactDOM from 'react-dom';
 
 import {Router, Route, IndexRoute} from 'react-router';
 
+import {createStore, applyMiddleware} from 'redux';
+import reducer from './reducer';
+import {Provider} from 'react-redux';
+
 import App from './components/App';
 import Sample from './components/Sample';
-import Dashboard from './components/Dashboard';
+import {DashboardContainer} from './components/Dashboard';
 
-ReactDOM.render((
-  <Router>
-    <Route path="/" component={App}>
-      <IndexRoute component={Dashboard} />
-    </Route>
-  </Router>
+import thunkMiddleWare from 'redux-thunk';
+
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleWare
+)(createStore);
+
+let store = createStoreWithMiddleware(reducer);
+
+ReactDOM.render(
+  (
+    <Provider store={store}>
+      <Router>
+        <Route path="/" component={App}>
+          <IndexRoute component={DashboardContainer} />
+        </Route>
+      </Router>
+    </Provider>
 ), document.getElementById('app'));
