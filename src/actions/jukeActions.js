@@ -1,5 +1,4 @@
 export function addResults(results) {
-  console.log('addresults', results);
   return {
     type: 'ADD_RESULTS',
     results
@@ -26,6 +25,14 @@ export function addSavedPlaylist(title) {
   }
 }
 
+export function addLocation(location) {
+  console.log('hello');
+  return {
+    type: 'ADD_LOCATION',
+    location
+  }
+}
+
 export function fetchTracks(query) {
   return function(dispatch) {
     return $.ajax({
@@ -39,4 +46,13 @@ export function fetchTracks(query) {
       }
     });
   }
+}
+
+export function getLocation() {
+  return function(dispatch) {
+    return navigator.geolocation.getCurrentPosition(function(position) {
+      dispatch(addLocation(position));
+    })
+  }
+
 }

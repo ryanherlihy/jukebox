@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 class TrackSearch extends Component {
 
   handleSearch() {
-    console.log(this.props);
     if (this.searchBox.value) {
       this.props.fetchTracks(this.searchBox.value)
     }

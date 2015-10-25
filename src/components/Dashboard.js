@@ -9,72 +9,18 @@ import Selected from './Selected';
 import TrackPreview from './TrackPreview';
 
 class Dashboard extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   console.log(this.props);
-  //   this.state = {
-  //     results: [],
-  //     selected: {
-  //       title: '',
-  //       playlist: []
-  //     },
-  //     saved: [],
-  //     currentTrack: null
-  //   }
-  //
-  //   this.addResults = this.addResults.bind(this);
-  //   this.addSelected = this.addSelected.bind(this);
-  //   this.addCurrentTrack = this.addCurrentTrack.bind(this);
-  //   this.addSavedPlaylist = this.addSavedPlaylist.bind(this);
-  // }
-  //
-  // onChange(newState) {
-  //   this.setState({
-  //     results: newState
-  //   })
-  // }
-  //
-  // addResults(query) {
-  //   $.ajax({
-  //     url: 'https://api.spotify.com/v1/search',
-  //     data: {
-  //       q: query,
-  //       type: 'track'
-  //     },
-  //     success: function (response) {
-  //       this.onChange(response.tracks.items)
-  //     }.bind(this)
-  //   });
-  // }
-  //
-  // addSelected() {
-  //   this.setState({
-  //     selected: {
-  //       playlist: this.state.selected.playlist.concat(this.state.currentTrack)
-  //     },
-  //     currentTrack: null
-  //   })
-  // }
-  //
-  // addCurrentTrack(track) {
-  //   this.setState({
-  //     currentTrack: track
-  //   })
-  // }
-  //
-  // addSavedPlaylist(title) {
-  //   this.setState({
-  //     saved: {
-  //       title: title,
-  //       playlist: this.state.saved.concat(this.state.selected)
-  //     },
-  //     selected: {
-  //       playlist: []
-  //     }
-  //   })
-  // }
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      jukeActions.addLocation(position);
+    })
+  }
 
   render() {
+    console.log(this.props.currentLocation);
+    // if ('geolocation' in navigator) {
+    //   jukeActions.getLocation();
+    // }
+
     let rightContent;
     if (this.props.currentTrack) {
       rightContent = (
