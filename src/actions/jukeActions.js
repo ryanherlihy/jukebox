@@ -85,14 +85,14 @@ export function addSavedPlaylist(title, playlist, loc) {
   }
 }
 
-export function getLocation() {
-  console.log('start');
-  return function(dispatch) {
-    return navigator.geolocation.getCurrentPosition(function(position) {
-      dispatch(addLocation(position));
-    })
-  }
-}
+// export function getLocation() {
+//   console.log('start');
+//   return function(dispatch) {
+//     return navigator.geolocation.getCurrentPosition(function(position) {
+//       dispatch(addLocation(position));
+//     })
+//   }
+// }
 
 // fireBaseRef.on('value', function(snapshot) {
 //   state.saved = snapshot.val().saved

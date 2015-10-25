@@ -19,6 +19,17 @@ class TrackPreview extends Component {
         });
       }
 
+      let button;
+      if (this.props.addSelected) {
+        button = (
+          <div className='container' style={{marginTop: 10}}>
+            <div className='row'>
+              <button onClick={this.props.addSelected} className='btn col m12 s12'>Add Track To Playlist</button>
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div className='card' style={{minHeight: 200}}>
           <div className='card-content'>
@@ -27,11 +38,7 @@ class TrackPreview extends Component {
             <p>By: {artists}</p>
             <p>Album: {this.props.track.album.name}</p>
             <p>Duration: {Math.floor((this.props.track.duration_ms / 1000) / 60)}:{Math.floor((this.props.track.duration_ms / 1000) % 60)}</p>
-            <div className='container' style={{marginTop: 10}}>
-              <div className='row'>
-                <button onClick={this.props.addSelected} className='btn col m12 s12'>Add Track To Playlist</button>
-              </div>
-            </div>
+
           </div>
         </div>
       )

@@ -7,6 +7,7 @@ import * as jukeActions from '../actions/jukeActions';
 import TrackList from './TrackList';
 import Selected from './Selected';
 import TrackPreview from './TrackPreview';
+import Heading from './Heading';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -34,12 +35,16 @@ class Dashboard extends Component {
       <div className='container' style={{marginTop: 20}}>
         <div className='row'>
           <div className='col m6 s12'>
+            <Heading
+              text="Search Tracks" />
             <TrackList
               results={this.props.results}
               fetchTracks={this.props.fetchTracks}
               addCurrentTrack={this.props.addCurrentTrack} />
           </div>
           <div className='col m6 s12'>
+            <Heading
+              text="New Playlist" />
             {rightContent}
           </div>
         </div>

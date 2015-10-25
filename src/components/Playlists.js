@@ -5,10 +5,15 @@ import {connect} from 'react-redux';
 import * as jukeActions from '../actions/jukeActions';
 
 import PlaylistItem from './PlaylistItem';
+import TrackPreview from './TrackPreview';
 
 class Playlists extends Component {
   componentDidMount() {
     this.props.fetchPlaylists();
+
+    $('.collapsible').collapsible({
+      accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
   }
 
   render() {
@@ -33,9 +38,17 @@ class Playlists extends Component {
         <div className='card'>
           <div className='card-content'>
             <h5>{this.props.currentPlaylist.title}</h5>
-            <ul className='collection'>
+            <ul className='collapsible popout' dataCollapsible='accordion'>
               {this.props.currentPlaylist.playlist.map((item, index) => {
-                return <li key={index} className='collection-item'>{item.name}</li>
+                return (
+                  <li key={index}>
+                    <div className='collapsible-header'>{item.name}</div>
+                    <div className='collapsible-body'>
+                      <TrackPreview
+                        track={item} />
+                    </div>
+                  </li>
+                )
               })}
             </ul>
           </div>

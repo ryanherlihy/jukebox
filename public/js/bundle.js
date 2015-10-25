@@ -81,9 +81,9 @@
 
 	var _componentsDashboard = __webpack_require__(229);
 
-	var _componentsPlaylists = __webpack_require__(235);
+	var _componentsPlaylists = __webpack_require__(236);
 
-	var _reduxThunk = __webpack_require__(237);
+	var _reduxThunk = __webpack_require__(238);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
@@ -25351,7 +25351,7 @@
 	  _createClass(App, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      (0, _actionsJukeActions.getLocation)();
+	      // getLocation();
 	    }
 	  }, {
 	    key: 'render',
@@ -25394,7 +25394,6 @@
 	exports.fetchTracks = fetchTracks;
 	exports.fetchPlaylists = fetchPlaylists;
 	exports.addSavedPlaylist = addSavedPlaylist;
-	exports.getLocation = getLocation;
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -25487,11 +25486,14 @@
 	  };
 	}
 
-	function getLocation() {
-	  return navigator.geolocation.getCurrentPosition(function (position) {
-	    dispatch(addLocation(position));
-	  });
-	}
+	// export function getLocation() {
+	//   console.log('start');
+	//   return function(dispatch) {
+	//     return navigator.geolocation.getCurrentPosition(function(position) {
+	//       dispatch(addLocation(position));
+	//     })
+	//   }
+	// }
 
 	// fireBaseRef.on('value', function(snapshot) {
 	//   state.saved = snapshot.val().saved
@@ -25899,6 +25901,10 @@
 
 	var _TrackPreview2 = _interopRequireDefault(_TrackPreview);
 
+	var _Heading = __webpack_require__(235);
+
+	var _Heading2 = _interopRequireDefault(_Heading);
+
 	var Dashboard = (function (_Component) {
 	  _inherits(Dashboard, _Component);
 
@@ -25936,6 +25942,8 @@
 	          _react2['default'].createElement(
 	            'div',
 	            { className: 'col m6 s12' },
+	            _react2['default'].createElement(_Heading2['default'], {
+	              text: 'Search Tracks' }),
 	            _react2['default'].createElement(_TrackList2['default'], {
 	              results: this.props.results,
 	              fetchTracks: this.props.fetchTracks,
@@ -25944,6 +25952,8 @@
 	          _react2['default'].createElement(
 	            'div',
 	            { className: 'col m6 s12' },
+	            _react2['default'].createElement(_Heading2['default'], {
+	              text: 'New Playlist' }),
 	            rightContent
 	          )
 	        )
@@ -26364,6 +26374,23 @@
 	          });
 	        }
 
+	        var button = undefined;
+	        if (this.props.addSelected) {
+	          button = _react2['default'].createElement(
+	            'div',
+	            { className: 'container', style: { marginTop: 10 } },
+	            _react2['default'].createElement(
+	              'div',
+	              { className: 'row' },
+	              _react2['default'].createElement(
+	                'button',
+	                { onClick: this.props.addSelected, className: 'btn col m12 s12' },
+	                'Add Track To Playlist'
+	              )
+	            )
+	          );
+	        }
+
 	        return _react2['default'].createElement(
 	          'div',
 	          { className: 'card', style: { minHeight: 200 } },
@@ -26395,19 +26422,6 @@
 	              Math.floor(this.props.track.duration_ms / 1000 / 60),
 	              ':',
 	              Math.floor(this.props.track.duration_ms / 1000 % 60)
-	            ),
-	            _react2['default'].createElement(
-	              'div',
-	              { className: 'container', style: { marginTop: 10 } },
-	              _react2['default'].createElement(
-	                'div',
-	                { className: 'row' },
-	                _react2['default'].createElement(
-	                  'button',
-	                  { onClick: this.props.addSelected, className: 'btn col m12 s12' },
-	                  'Add Track To Playlist'
-	                )
-	              )
 	            )
 	          )
 	        );
@@ -26441,6 +26455,68 @@
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Heading = (function (_Component) {
+	  _inherits(Heading, _Component);
+
+	  function Heading() {
+	    _classCallCheck(this, Heading);
+
+	    _get(Object.getPrototypeOf(Heading.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(Heading, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: 'card indigo' },
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'card-content' },
+	          _react2['default'].createElement(
+	            'h5',
+	            { className: 'white-text' },
+	            this.props.text
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Heading;
+	})(_react.Component);
+
+	exports['default'] = Heading;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Heading.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -26459,9 +26535,13 @@
 
 	var jukeActions = _interopRequireWildcard(_actionsJukeActions);
 
-	var _PlaylistItem = __webpack_require__(236);
+	var _PlaylistItem = __webpack_require__(237);
 
 	var _PlaylistItem2 = _interopRequireDefault(_PlaylistItem);
+
+	var _TrackPreview = __webpack_require__(234);
+
+	var _TrackPreview2 = _interopRequireDefault(_TrackPreview);
 
 	var Playlists = (function (_Component) {
 	  _inherits(Playlists, _Component);
@@ -26476,6 +26556,10 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.props.fetchPlaylists();
+
+	      $('.collapsible').collapsible({
+	        accordion: true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -26514,12 +26598,22 @@
 	            ),
 	            _react2['default'].createElement(
 	              'ul',
-	              { className: 'collection' },
+	              { className: 'collapsible popout', dataCollapsible: 'accordion' },
 	              this.props.currentPlaylist.playlist.map(function (item, index) {
 	                return _react2['default'].createElement(
 	                  'li',
-	                  { key: index, className: 'collection-item' },
-	                  item.name
+	                  { key: index },
+	                  _react2['default'].createElement(
+	                    'div',
+	                    { className: 'collapsible-header' },
+	                    item.name
+	                  ),
+	                  _react2['default'].createElement(
+	                    'div',
+	                    { className: 'collapsible-body' },
+	                    _react2['default'].createElement(_TrackPreview2['default'], {
+	                      track: item })
+	                  )
 	                );
 	              })
 	            )
@@ -26582,7 +26676,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Playlists.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -26643,7 +26737,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "PlaylistItem.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports) {
 
 	'use strict';
