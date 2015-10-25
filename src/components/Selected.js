@@ -6,9 +6,6 @@ class Selected extends Component {
       return (
         <li key={index}>
           <div className='collapsible-header'>{item.name}</div>
-          <div className='collapsible-body'>
-            <img src={item.images.length > 0 ? item.images[0].url : ''} />
-          </div>
         </li>
       )
     });

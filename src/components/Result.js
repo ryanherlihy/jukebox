@@ -9,11 +9,6 @@ class Result extends Component {
     return (
       <li onClick={this.handleSelect.bind(this)}>
         <div className='collapsible-header'>{this.props.item.name}</div>
-        <div className='collapsible-body'>
-          <img src={
-              this.props.item.images.length > 0 ? this.props.item.images[0].url : ''
-            } />
-        </div>
       </li>
     )
   }

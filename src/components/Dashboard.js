@@ -27,10 +27,10 @@ class Dashboard extends Component {
       url: 'https://api.spotify.com/v1/search',
       data: {
         q: query,
-        type: 'artist'
+        type: 'track'
       },
       success: function (response) {
-        this.onChange(response.artists.items)
+        this.onChange(response.tracks.items)
       }.bind(this)
     });
   }
@@ -55,7 +55,7 @@ class Dashboard extends Component {
               </div>
             </div>
           </div>
-          <div className='col m4'>
+          <div className='col m6'>
             <div className='card'>
               <div className='card-content'>
                 <Selected

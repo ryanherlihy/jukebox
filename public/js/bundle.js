@@ -24245,17 +24245,16 @@
 	        url: 'https://api.spotify.com/v1/search',
 	        data: {
 	          q: query,
-	          type: 'artist'
+	          type: 'track'
 	        },
 	        success: (function (response) {
-	          this.onChange(response.artists.items);
+	          this.onChange(response.tracks.items);
 	        }).bind(this)
 	      });
 	    }
 	  }, {
 	    key: 'addSelected',
 	    value: function addSelected(item) {
-	      console.log(this.state.selected.find(item));
 	      this.setState({
 	        selected: this.state.selected.concat(item)
 	      });
@@ -24287,7 +24286,7 @@
 	          ),
 	          _react2['default'].createElement(
 	            'div',
-	            { className: 'col m4' },
+	            { className: 'col m6' },
 	            _react2['default'].createElement(
 	              'div',
 	              { className: 'card' },
@@ -24361,6 +24360,7 @@
 	      var _this = this;
 
 	      var results = this.props.results.map(function (item, index) {
+	        console.log(item);
 	        return _react2['default'].createElement(_Result2['default'], {
 	          key: index,
 	          item: item,
@@ -24453,7 +24453,7 @@
 	        _react2['default'].createElement(
 	          'button',
 	          { className: 'btn', onClick: this.handleSearch.bind(this) },
-	          'Find Artist'
+	          'Find Track'
 	        )
 	      );
 	    }
@@ -24517,11 +24517,6 @@
 	          'div',
 	          { className: 'collapsible-header' },
 	          this.props.item.name
-	        ),
-	        _react2['default'].createElement(
-	          'div',
-	          { className: 'collapsible-body' },
-	          _react2['default'].createElement('img', { src: this.props.item.images.length > 0 ? this.props.item.images[0].url : '' })
 	        )
 	      );
 	    }
@@ -24581,11 +24576,6 @@
 	            'div',
 	            { className: 'collapsible-header' },
 	            item.name
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { className: 'collapsible-body' },
-	            _react2['default'].createElement('img', { src: item.images.length > 0 ? item.images[0].url : '' })
 	          )
 	        );
 	      });

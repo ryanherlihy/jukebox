@@ -7,6 +7,7 @@ class TrackList extends Component {
 
   render() {
     let results = this.props.results.map((item, index) => {
+      console.log(item);
       return (
         <Result
           key={index}
