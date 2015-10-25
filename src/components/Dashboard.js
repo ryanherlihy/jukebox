@@ -10,13 +10,18 @@ class Dashboard extends Component {
 
     this.state = {
       results: [],
-      selected: [],
+      selected: {
+        title: '',
+        playlist: []
+      },
+      saved: [],
       currentTrack: null
     }
 
     this.addResults = this.addResults.bind(this);
     this.addSelected = this.addSelected.bind(this);
     this.addCurrentTrack = this.addCurrentTrack.bind(this);
+    this.addSavedPlaylist = this.addSavedPlaylist.bind(this);
   }
 
   onChange(newState) {
@@ -40,7 +45,9 @@ class Dashboard extends Component {
 
   addSelected() {
     this.setState({
-      selected: this.state.selected.concat(this.state.currentTrack),
+      selected: {
+        playlist: this.state.selected.playlist.concat(this.state.currentTrack)
+      },
       currentTrack: null
     })
   }
@@ -48,6 +55,18 @@ class Dashboard extends Component {
   addCurrentTrack(track) {
     this.setState({
       currentTrack: track
+    })
+  }
+
+  addSavedPlaylist(title) {
+    this.setState({
+      saved: {
+        title: title,
+        playlist: this.state.saved.concat(this.state.selected)
+      },
+      selected: {
+        playlist: []
+      }
     })
   }
 
@@ -62,20 +81,21 @@ class Dashboard extends Component {
     } else {
       rightContent = (
         <Selected
-          selected={this.state.selected} />
+          selected={this.state.selected.playlist}
+          addSavedPlaylist={this.addSavedPlaylist} />
       )
     }
 
     return (
       <div className='container' style={{marginTop: 20}}>
         <div className='row'>
-          <div className='col m6'>
+          <div className='col m6 s12'>
             <TrackList
               results={this.state.results}
               addResults={this.addResults}
               addCurrentTrack={this.addCurrentTrack} />
           </div>
-          <div className='col m6'>
+          <div className='col m6 s12'>
             {rightContent}
           </div>
         </div>

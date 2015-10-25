@@ -20,7 +20,7 @@ class TrackList extends Component {
       <div className='card'>
         <div className='card-content'>
           <TrackSearch addResults={this.props.addResults}/>
-          <ul className='collapsible popout' data-collapsible="accordion" style={{marginTop: 10}}>
+          <ul style={{marginTop: 10}}>
             {results}
           </ul>
         </div>

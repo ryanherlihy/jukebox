@@ -29,7 +29,7 @@ class TrackPreview extends Component {
             <p>Duration: {Math.floor((this.props.track.duration_ms / 1000) / 60)}:{Math.floor((this.props.track.duration_ms / 1000) % 60)}</p>
             <div className='container' style={{marginTop: 10}}>
               <div className='row'>
-                <button onClick={this.props.addSelected} className='btn col m12'>Add Track To Playlist</button>
+                <button onClick={this.props.addSelected} className='btn col m12 s12'>Add Track To Playlist</button>
               </div>
             </div>
           </div>

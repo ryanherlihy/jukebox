@@ -24,7 +24,7 @@ class TrackSearch extends Component {
           className='input-field'
           type='text'
           placeholder='Search Tracks' />
-        <button className='btn' onClick={this.handleSearch.bind(this)}>Find Track</button>
+        <button className='btn col m12' style={{marginBottom:10}} onClick={this.handleSearch.bind(this)}>Find Track</button>
       </div>
     )
   }

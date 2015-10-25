@@ -24228,13 +24228,18 @@
 
 	    this.state = {
 	      results: [],
-	      selected: [],
+	      selected: {
+	        title: '',
+	        playlist: []
+	      },
+	      saved: [],
 	      currentTrack: null
 	    };
 
 	    this.addResults = this.addResults.bind(this);
 	    this.addSelected = this.addSelected.bind(this);
 	    this.addCurrentTrack = this.addCurrentTrack.bind(this);
+	    this.addSavedPlaylist = this.addSavedPlaylist.bind(this);
 	  }
 
 	  _createClass(Dashboard, [{
@@ -24262,7 +24267,9 @@
 	    key: 'addSelected',
 	    value: function addSelected() {
 	      this.setState({
-	        selected: this.state.selected.concat(this.state.currentTrack),
+	        selected: {
+	          playlist: this.state.selected.playlist.concat(this.state.currentTrack)
+	        },
 	        currentTrack: null
 	      });
 	    }
@@ -24271,6 +24278,19 @@
 	    value: function addCurrentTrack(track) {
 	      this.setState({
 	        currentTrack: track
+	      });
+	    }
+	  }, {
+	    key: 'addSavedPlaylist',
+	    value: function addSavedPlaylist(title) {
+	      this.setState({
+	        saved: {
+	          title: title,
+	          playlist: this.state.saved.concat(this.state.selected)
+	        },
+	        selected: {
+	          playlist: []
+	        }
 	      });
 	    }
 	  }, {
@@ -24283,7 +24303,8 @@
 	          addSelected: this.addSelected });
 	      } else {
 	        rightContent = _react2['default'].createElement(_Selected2['default'], {
-	          selected: this.state.selected });
+	          selected: this.state.selected.playlist,
+	          addSavedPlaylist: this.addSavedPlaylist });
 	      }
 
 	      return _react2['default'].createElement(
@@ -24294,7 +24315,7 @@
 	          { className: 'row' },
 	          _react2['default'].createElement(
 	            'div',
-	            { className: 'col m6' },
+	            { className: 'col m6 s12' },
 	            _react2['default'].createElement(_TrackList2['default'], {
 	              results: this.state.results,
 	              addResults: this.addResults,
@@ -24302,7 +24323,7 @@
 	          ),
 	          _react2['default'].createElement(
 	            'div',
-	            { className: 'col m6' },
+	            { className: 'col m6 s12' },
 	            rightContent
 	          )
 	        )
@@ -24383,7 +24404,7 @@
 	          _react2['default'].createElement(_TrackSearch2['default'], { addResults: this.props.addResults }),
 	          _react2['default'].createElement(
 	            'ul',
-	            { className: 'collapsible popout', 'data-collapsible': 'accordion', style: { marginTop: 10 } },
+	            { style: { marginTop: 10 } },
 	            results
 	          )
 	        )
@@ -24463,7 +24484,7 @@
 	          placeholder: 'Search Tracks' }),
 	        _react2['default'].createElement(
 	          'button',
-	          { className: 'btn', onClick: this.handleSearch.bind(this) },
+	          { className: 'btn col m12', style: { marginBottom: 10 }, onClick: this.handleSearch.bind(this) },
 	          'Find Track'
 	        )
 	      );
@@ -24577,8 +24598,20 @@
 	  }
 
 	  _createClass(Selected, [{
+	    key: 'handleAddSavedPlaylist',
+	    value: function handleAddSavedPlaylist() {
+	      if (this.playlistTitle.value) {
+	        this.props.addSavedPlaylist(this.playlistTitle.value);
+	      } else {
+	        alert('You must enter a title for the playlist');
+	      }
+	      this.playlistTitle.value = '';
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this = this;
+
 	      var selected = this.props.selected.map(function (item, index) {
 	        return _react2['default'].createElement(
 	          'li',
@@ -24591,17 +24624,48 @@
 	        );
 	      });
 
+	      var empty = undefined;
+	      if (this.props.selected.length === 0) {
+	        empty = _react2['default'].createElement(
+	          'p',
+	          null,
+	          'Empty Playlist'
+	        );
+	      } else {
+	        empty = _react2['default'].createElement(
+	          'div',
+	          { className: 'container', style: { marginTop: 10 } },
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'row' },
+	            _react2['default'].createElement(
+	              'button',
+	              { onClick: this.handleAddSavedPlaylist.bind(this), className: 'btn col m12 s12' },
+	              'Save And Create Playlist'
+	            )
+	          )
+	        );
+	      }
+
 	      return _react2['default'].createElement(
 	        'div',
 	        { className: 'card' },
 	        _react2['default'].createElement(
 	          'div',
 	          { className: 'card-content' },
+	          _react2['default'].createElement('input', {
+	            ref: function (ref) {
+	              return _this.playlistTitle = ref;
+	            },
+	            className: 'input-field',
+	            type: 'text',
+	            placeholder: 'Enter Playlist Title' }),
 	          _react2['default'].createElement(
 	            'ul',
-	            { className: 'collapsible popout', 'data-collapsible': 'accordion' },
+	            null,
 	            selected
-	          )
+	          ),
+	          empty
 	        )
 	      );
 	    }
@@ -24712,7 +24776,7 @@
 	                { className: 'row' },
 	                _react2['default'].createElement(
 	                  'button',
-	                  { onClick: this.props.addSelected, className: 'btn col m12' },
+	                  { onClick: this.props.addSelected, className: 'btn col m12 s12' },
 	                  'Add Track To Playlist'
 	                )
 	              )
