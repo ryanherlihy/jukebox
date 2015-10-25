@@ -1,8 +1,3 @@
-import Firebase from 'firebase';
-
-let fireBaseRef = new Firebase('https://juke-hackumass.firebaseio.com/');
-let savedPlaylistsRef = fireBaseRef.child('saved');
-
 
 
 const INITIAL_STATE = {
@@ -12,18 +7,18 @@ const INITIAL_STATE = {
     playlist: []
   },
   saved: [],
-  currentTrack: null
+  currentTrack: null,
+  currentPlaylist: null
 };
 
 export default function(state = INITIAL_STATE, action) {
 
-  fireBaseRef.on('value', function(snapshot) {
-    state.saved = snapshot.val().saved
-  }, function(errorObject) {
-    console.log('Failure to retrieve data');
-  });
 
   switch (action.type) {
+    case 'INIT_SAVED':
+      return Object.assign({}, state, {
+        saved: action.saved
+      });
     case 'ADD_RESULTS':
       return Object.assign({}, state, {
         results: action.results
@@ -41,21 +36,17 @@ export default function(state = INITIAL_STATE, action) {
       return Object.assign({}, state, {
         currentTrack: action.track
       });
-    case 'ADD_SAVED_PLAYLIST':
-      savedPlaylistsRef.push(
-        {
-          title: action.title,
-          playlist: state.selected
-        }
-      );
+    case 'ADD_CURRENT_PLAYLIST':
+      return Object.assign({}, state, {
+        currentPlaylist: action.playlist
+      });
+    case 'CLEAR_SELECTED':
       return Object.assign({
         selected: {
-          location: state.location,
           playlist: []
         }
       });
     case 'ADD_LOCATION':
-      console.log('here');
       return Object.assign({
         currentLocation: action.location
       });

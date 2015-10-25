@@ -20,7 +20,7 @@ class TrackPreview extends Component {
       }
 
       return (
-        <div className='card'>
+        <div className='card' style={{minHeight: 200}}>
           <div className='card-content'>
             {image}
             <h5>{this.props.track.name}</h5>

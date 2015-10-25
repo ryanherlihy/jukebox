@@ -19,7 +19,7 @@ class TrackList extends Component {
     }
 
     return (
-      <div className='card'>
+      <div className='card' style={{minHeight: 200}}>
         <div className='card-content'>
           <TrackSearch fetchTracks={this.props.fetchTracks}/>
           <ul style={{marginTop: 10}}>

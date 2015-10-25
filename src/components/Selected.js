@@ -4,7 +4,11 @@ class Selected extends Component {
 
   handleAddSavedPlaylist() {
     if (this.playlistTitle.value) {
-      this.props.addSavedPlaylist(this.playlistTitle.value);
+      this.props.addSavedPlaylist(
+        this.playlistTitle.value,
+        this.props.selected.playlist,
+        this.loc
+      );
     } else {
       alert('You must enter a title for the playlist');
     }
@@ -12,7 +16,8 @@ class Selected extends Component {
   }
 
   render() {
-    let selected = this.props.selected.map((item, index) => {
+    console.log(this.props);
+    let selected = this.props.selected.playlist.map((item, index) => {
       return (
         <li key={index}>
           <div className='collapsible-header'>{item.name}</div>
@@ -21,7 +26,7 @@ class Selected extends Component {
     });
 
     let empty;
-    if (this.props.selected.length === 0) {
+    if (this.props.selected.playlist.length === 0) {
       empty = <p>Empty Playlist</p>;
     } else {
       empty = (
@@ -34,7 +39,7 @@ class Selected extends Component {
     }
 
     return (
-      <div className='card'>
+      <div className='card' style={{minHeight: 200}}>
         <div className='card-content'>
           <input
             ref={(ref) => this.playlistTitle = ref}

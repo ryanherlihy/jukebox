@@ -8,8 +8,8 @@ import reducer from './reducer';
 import {Provider} from 'react-redux';
 
 import App from './components/App';
-import Sample from './components/Sample';
 import {DashboardContainer} from './components/Dashboard';
+import {PlaylistsContainer} from './components/Playlists';
 
 import thunkMiddleWare from 'redux-thunk';
 
@@ -25,6 +25,7 @@ ReactDOM.render(
       <Router>
         <Route path="/" component={App}>
           <IndexRoute component={DashboardContainer} />
+          <Route path='playlists' component={PlaylistsContainer} />
         </Route>
       </Router>
     </Provider>

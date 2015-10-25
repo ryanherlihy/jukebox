@@ -1,3 +1,15 @@
+import Firebase from 'firebase';
+
+let fireBaseRef = new Firebase('https://juke-hackumass.firebaseio.com/');
+let savedPlaylistsRef = fireBaseRef.child('saved');
+
+export function initSaved(saved) {
+  return {
+    type: 'INIT_SAVED',
+    saved
+  }
+}
+
 export function addResults(results) {
   return {
     type: 'ADD_RESULTS',
@@ -18,15 +30,20 @@ export function addCurrentTrack(track) {
   }
 }
 
-export function addSavedPlaylist(title) {
+export function addCurrentPlaylist(playlist) {
   return {
-    type: 'ADD_SAVED_PLAYLIST',
-    title
+    type: 'ADD_CURRENT_PLAYLIST',
+    playlist
+  }
+}
+
+export function clearSelected() {
+  return {
+    type: 'CLEAR_SELECTED'
   }
 }
 
 export function addLocation(location) {
-  console.log('hello');
   return {
     type: 'ADD_LOCATION',
     location
@@ -48,11 +65,35 @@ export function fetchTracks(query) {
   }
 }
 
+export function fetchPlaylists() {
+  return function(dispatch) {
+    return fireBaseRef.once('value', function(snapshot) {
+      dispatch(initSaved(snapshot.val().saved));
+    });
+  }
+}
+
+export function addSavedPlaylist(title, playlist, loc) {
+  return function(dispatch) {
+    savedPlaylistsRef.push({
+      title: title,
+      loc: loc ? loc : {},
+      playlist: playlist
+    });
+    return dispatch(clearSelected());
+  }
+}
+
 export function getLocation() {
   return function(dispatch) {
     return navigator.geolocation.getCurrentPosition(function(position) {
       dispatch(addLocation(position));
     })
   }
-
 }
+
+// fireBaseRef.on('value', function(snapshot) {
+//   state.saved = snapshot.val().saved
+// }, function(errorObject) {
+//   console.log('Failure to retrieve data');
+// });

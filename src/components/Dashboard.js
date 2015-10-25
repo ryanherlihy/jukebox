@@ -10,16 +10,13 @@ import TrackPreview from './TrackPreview';
 
 class Dashboard extends Component {
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      jukeActions.addLocation(position);
-    })
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //   this.props.addLocation(position);
+    // })
+
   }
 
   render() {
-    console.log(this.props.currentLocation);
-    // if ('geolocation' in navigator) {
-    //   jukeActions.getLocation();
-    // }
 
     let rightContent;
     if (this.props.currentTrack) {
@@ -31,7 +28,8 @@ class Dashboard extends Component {
     } else {
       rightContent = (
         <Selected
-          selected={this.props.selected.playlist}
+          selected={this.props.selected}
+          loc={this.props.currentLocation}
           addSavedPlaylist={this.props.addSavedPlaylist} />
       )
     }
