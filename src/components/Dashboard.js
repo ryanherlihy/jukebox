@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import TrackList from './TrackList';
 import Selected from './Selected';
+import TrackPreview from './TrackPreview';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -9,11 +10,13 @@ class Dashboard extends Component {
 
     this.state = {
       results: [],
-      selected: []
+      selected: [],
+      currentTrack: null
     }
 
     this.addResults = this.addResults.bind(this);
     this.addSelected = this.addSelected.bind(this);
+    this.addCurrentTrack = this.addCurrentTrack.bind(this);
   }
 
   onChange(newState) {
@@ -35,33 +38,45 @@ class Dashboard extends Component {
     });
   }
 
-  addSelected(item) {
+  addSelected() {
     this.setState({
-      selected: this.state.selected.concat(item)
+      selected: this.state.selected.concat(this.state.currentTrack),
+      currentTrack: null
+    })
+  }
+
+  addCurrentTrack(track) {
+    this.setState({
+      currentTrack: track
     })
   }
 
   render() {
+    let rightContent;
+    if (this.state.currentTrack) {
+      rightContent = (
+        <TrackPreview
+          track={this.state.currentTrack}
+          addSelected={this.addSelected} />
+      );
+    } else {
+      rightContent = (
+        <Selected
+          selected={this.state.selected} />
+      )
+    }
+
     return (
-      <div className='container'>
+      <div className='container' style={{marginTop: 20}}>
         <div className='row'>
           <div className='col m6'>
-            <div className='card'>
-              <div className='card-content'>
-                <TrackList
-                  results={this.state.results}
-                  addResults={this.addResults}
-                  addSelected={this.addSelected} />
-              </div>
-            </div>
+            <TrackList
+              results={this.state.results}
+              addResults={this.addResults}
+              addCurrentTrack={this.addCurrentTrack} />
           </div>
           <div className='col m6'>
-            <div className='card'>
-              <div className='card-content'>
-                <Selected
-                  selected={this.state.selected} />
-              </div>
-            </div>
+            {rightContent}
           </div>
         </div>
       </div>

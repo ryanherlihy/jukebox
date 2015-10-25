@@ -12,16 +12,18 @@ class TrackList extends Component {
         <Result
           key={index}
           item={item}
-          addSelected={this.props.addSelected} />
+          addCurrentTrack={this.props.addCurrentTrack} />
       )
     });
 
     return (
-      <div>
-        <TrackSearch addResults={this.props.addResults}/>
-        <ul className='collapsible popout' data-collapsible="accordion">
-          {results}
-        </ul>
+      <div className='card'>
+        <div className='card-content'>
+          <TrackSearch addResults={this.props.addResults}/>
+          <ul className='collapsible popout' data-collapsible="accordion" style={{marginTop: 10}}>
+            {results}
+          </ul>
+        </div>
       </div>
     )
   }

@@ -11,10 +11,12 @@ class Selected extends Component {
     });
 
     return (
-      <div>
-        <ul className='collapsible popout' data-collapsible="accordion">
-          {selected}
-        </ul>
+      <div className='card'>
+        <div className='card-content'>
+          <ul className='collapsible popout' data-collapsible="accordion">
+            {selected}
+          </ul>
+        </div>
       </div>
     )
   }

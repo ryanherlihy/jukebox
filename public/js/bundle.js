@@ -24214,6 +24214,10 @@
 
 	var _Selected2 = _interopRequireDefault(_Selected);
 
+	var _TrackPreview = __webpack_require__(213);
+
+	var _TrackPreview2 = _interopRequireDefault(_TrackPreview);
+
 	var Dashboard = (function (_Component) {
 	  _inherits(Dashboard, _Component);
 
@@ -24224,11 +24228,13 @@
 
 	    this.state = {
 	      results: [],
-	      selected: []
+	      selected: [],
+	      currentTrack: null
 	    };
 
 	    this.addResults = this.addResults.bind(this);
 	    this.addSelected = this.addSelected.bind(this);
+	    this.addCurrentTrack = this.addCurrentTrack.bind(this);
 	  }
 
 	  _createClass(Dashboard, [{
@@ -24254,49 +24260,50 @@
 	    }
 	  }, {
 	    key: 'addSelected',
-	    value: function addSelected(item) {
+	    value: function addSelected() {
 	      this.setState({
-	        selected: this.state.selected.concat(item)
+	        selected: this.state.selected.concat(this.state.currentTrack),
+	        currentTrack: null
+	      });
+	    }
+	  }, {
+	    key: 'addCurrentTrack',
+	    value: function addCurrentTrack(track) {
+	      this.setState({
+	        currentTrack: track
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var rightContent = undefined;
+	      if (this.state.currentTrack) {
+	        rightContent = _react2['default'].createElement(_TrackPreview2['default'], {
+	          track: this.state.currentTrack,
+	          addSelected: this.addSelected });
+	      } else {
+	        rightContent = _react2['default'].createElement(_Selected2['default'], {
+	          selected: this.state.selected });
+	      }
+
 	      return _react2['default'].createElement(
 	        'div',
-	        { className: 'container' },
+	        { className: 'container', style: { marginTop: 20 } },
 	        _react2['default'].createElement(
 	          'div',
 	          { className: 'row' },
 	          _react2['default'].createElement(
 	            'div',
 	            { className: 'col m6' },
-	            _react2['default'].createElement(
-	              'div',
-	              { className: 'card' },
-	              _react2['default'].createElement(
-	                'div',
-	                { className: 'card-content' },
-	                _react2['default'].createElement(_TrackList2['default'], {
-	                  results: this.state.results,
-	                  addResults: this.addResults,
-	                  addSelected: this.addSelected })
-	              )
-	            )
+	            _react2['default'].createElement(_TrackList2['default'], {
+	              results: this.state.results,
+	              addResults: this.addResults,
+	              addCurrentTrack: this.addCurrentTrack })
 	          ),
 	          _react2['default'].createElement(
 	            'div',
 	            { className: 'col m6' },
-	            _react2['default'].createElement(
-	              'div',
-	              { className: 'card' },
-	              _react2['default'].createElement(
-	                'div',
-	                { className: 'card-content' },
-	                _react2['default'].createElement(_Selected2['default'], {
-	                  selected: this.state.selected })
-	              )
-	            )
+	            rightContent
 	          )
 	        )
 	      );
@@ -24364,17 +24371,21 @@
 	        return _react2['default'].createElement(_Result2['default'], {
 	          key: index,
 	          item: item,
-	          addSelected: _this.props.addSelected });
+	          addCurrentTrack: _this.props.addCurrentTrack });
 	      });
 
 	      return _react2['default'].createElement(
 	        'div',
-	        null,
-	        _react2['default'].createElement(_TrackSearch2['default'], { addResults: this.props.addResults }),
+	        { className: 'card' },
 	        _react2['default'].createElement(
-	          'ul',
-	          { className: 'collapsible popout', 'data-collapsible': 'accordion' },
-	          results
+	          'div',
+	          { className: 'card-content' },
+	          _react2['default'].createElement(_TrackSearch2['default'], { addResults: this.props.addResults }),
+	          _react2['default'].createElement(
+	            'ul',
+	            { className: 'collapsible popout', 'data-collapsible': 'accordion', style: { marginTop: 10 } },
+	            results
+	          )
 	        )
 	      );
 	    }
@@ -24449,7 +24460,7 @@
 	          },
 	          className: 'input-field',
 	          type: 'text',
-	          placeholder: 'Search' }),
+	          placeholder: 'Search Tracks' }),
 	        _react2['default'].createElement(
 	          'button',
 	          { className: 'btn', onClick: this.handleSearch.bind(this) },
@@ -24505,7 +24516,7 @@
 	  _createClass(Result, [{
 	    key: 'handleSelect',
 	    value: function handleSelect() {
-	      this.props.addSelected(this.props.item);
+	      this.props.addCurrentTrack(this.props.item);
 	    }
 	  }, {
 	    key: 'render',
@@ -24582,11 +24593,15 @@
 
 	      return _react2['default'].createElement(
 	        'div',
-	        null,
+	        { className: 'card' },
 	        _react2['default'].createElement(
-	          'ul',
-	          { className: 'collapsible popout', 'data-collapsible': 'accordion' },
-	          selected
+	          'div',
+	          { className: 'card-content' },
+	          _react2['default'].createElement(
+	            'ul',
+	            { className: 'collapsible popout', 'data-collapsible': 'accordion' },
+	            selected
+	          )
 	        )
 	      );
 	    }
@@ -24599,6 +24614,124 @@
 	module.exports = exports['default'];
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Selected.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var TrackPreview = (function (_Component) {
+	  _inherits(TrackPreview, _Component);
+
+	  function TrackPreview() {
+	    _classCallCheck(this, TrackPreview);
+
+	    _get(Object.getPrototypeOf(TrackPreview.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(TrackPreview, [{
+	    key: 'render',
+	    value: function render() {
+	      if (this.props.track) {
+	        var image = undefined;
+	        if (this.props.track) {
+	          image = _react2['default'].createElement('img', { src: this.props.track.album.images[0].url, className: 'responsive-img' });
+	        }
+
+	        var artists = undefined;
+	        if (this.props.track) {
+	          artists = this.props.track.artists.map(function (artist, index) {
+	            return _react2['default'].createElement(
+	              'span',
+	              { style: { display: "inline" },
+	                key: index },
+	              artist.name,
+	              ' '
+	            );
+	          });
+	        }
+
+	        return _react2['default'].createElement(
+	          'div',
+	          { className: 'card' },
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'card-content' },
+	            image,
+	            _react2['default'].createElement(
+	              'h5',
+	              null,
+	              this.props.track.name
+	            ),
+	            _react2['default'].createElement(
+	              'p',
+	              null,
+	              'By: ',
+	              artists
+	            ),
+	            _react2['default'].createElement(
+	              'p',
+	              null,
+	              'Album: ',
+	              this.props.track.album.name
+	            ),
+	            _react2['default'].createElement(
+	              'p',
+	              null,
+	              'Duration: ',
+	              Math.floor(this.props.track.duration_ms / 1000 / 60),
+	              ':',
+	              Math.floor(this.props.track.duration_ms / 1000 % 60)
+	            ),
+	            _react2['default'].createElement(
+	              'div',
+	              { className: 'container', style: { marginTop: 10 } },
+	              _react2['default'].createElement(
+	                'div',
+	                { className: 'row' },
+	                _react2['default'].createElement(
+	                  'button',
+	                  { onClick: this.props.addSelected, className: 'btn col m12' },
+	                  'Add Track To Playlist'
+	                )
+	              )
+	            )
+	          )
+	        );
+	      } else {
+	        return _react2['default'].createElement('div', null);
+	      }
+	    }
+	  }]);
+
+	  return TrackPreview;
+	})(_react.Component);
+
+	exports['default'] = TrackPreview;
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "TrackPreview.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);

@@ -23,7 +23,7 @@ class TrackSearch extends Component {
           ref={(ref) => this.searchBox = ref}
           className='input-field'
           type='text'
-          placeholder='Search' />
+          placeholder='Search Tracks' />
         <button className='btn' onClick={this.handleSearch.bind(this)}>Find Track</button>
       </div>
     )

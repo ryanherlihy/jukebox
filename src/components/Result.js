@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class Result extends Component {
   handleSelect() {
-    this.props.addSelected(this.props.item);
+    this.props.addCurrentTrack(this.props.item);
   }
 
   render() {
