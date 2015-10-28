@@ -24595,9 +24595,8 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-
 	var INITIAL_STATE = {
-	  currentLocation: {},
+	  currentLocation: null,
 	  results: [],
 	  selected: {
 	    playlist: []
@@ -25351,7 +25350,13 @@
 	  _createClass(App, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      // getLocation();
+	      if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(function (position) {
+	          (0, _actionsJukeActions.addLocation)(position);
+	        }, function () {
+	          console.log('Error getting location.');
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -25445,11 +25450,11 @@
 	}
 
 	function addLocation(location) {
-	  console.log(location);
 	  return {
 	    type: 'ADD_LOCATION',
 	    location: location
 	  };
+	  console.log(location);
 	}
 
 	function fetchTracks(query) {
@@ -25476,6 +25481,7 @@
 	}
 
 	function addSavedPlaylist(title, playlist, loc) {
+	  console.log(loc);
 	  return function (dispatch) {
 	    savedPlaylistsRef.push({
 	      title: title,
@@ -25485,21 +25491,6 @@
 	    return dispatch(clearSelected());
 	  };
 	}
-
-	// export function getLocation() {
-	//   console.log('start');
-	//   return function(dispatch) {
-	//     return navigator.geolocation.getCurrentPosition(function(position) {
-	//       dispatch(addLocation(position));
-	//     })
-	//   }
-	// }
-
-	// fireBaseRef.on('value', function(snapshot) {
-	//   state.saved = snapshot.val().saved
-	// }, function(errorObject) {
-	//   console.log('Failure to retrieve data');
-	// });
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "jukeActions.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -26238,7 +26229,7 @@
 	    key: 'handleAddSavedPlaylist',
 	    value: function handleAddSavedPlaylist() {
 	      if (this.playlistTitle.value) {
-	        this.props.addSavedPlaylist(this.playlistTitle.value, this.props.selected.playlist, this.loc);
+	        this.props.addSavedPlaylist(this.playlistTitle.value, this.props.selected.playlist, this.props.loc);
 	      } else {
 	        alert('You must enter a title for the playlist');
 	      }
@@ -26422,7 +26413,8 @@
 	              Math.floor(this.props.track.duration_ms / 1000 / 60),
 	              ':',
 	              Math.floor(this.props.track.duration_ms / 1000 % 60)
-	            )
+	            ),
+	            button
 	          )
 	        );
 	      } else {
@@ -26568,7 +26560,13 @@
 
 	      var playlists = [];
 	      var empty = undefined;
-	      if (!this.props.playlists || this.props.playlists.length === 0) {
+	      if (!this.props.playlists) {
+	        empty = _react2['default'].createElement(
+	          'div',
+	          { className: 'progress' },
+	          _react2['default'].createElement('div', { className: 'indeterminate' })
+	        );
+	      } else if (this.props.playlists.length === 0) {
 	        empty = _react2['default'].createElement(
 	          'p',
 	          null,

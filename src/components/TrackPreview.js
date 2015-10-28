@@ -38,7 +38,7 @@ class TrackPreview extends Component {
             <p>By: {artists}</p>
             <p>Album: {this.props.track.album.name}</p>
             <p>Duration: {Math.floor((this.props.track.duration_ms / 1000) / 60)}:{Math.floor((this.props.track.duration_ms / 1000) % 60)}</p>
-
+            {button}
           </div>
         </div>
       )

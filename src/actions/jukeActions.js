@@ -44,11 +44,11 @@ export function clearSelected() {
 }
 
 export function addLocation(location) {
-  console.log(location);
   return {
     type: 'ADD_LOCATION',
     location
   }
+  console.log(location);
 }
 
 export function fetchTracks(query) {
@@ -75,6 +75,7 @@ export function fetchPlaylists() {
 }
 
 export function addSavedPlaylist(title, playlist, loc) {
+  console.log(loc);
   return function(dispatch) {
     savedPlaylistsRef.push({
       title: title,
@@ -84,18 +85,3 @@ export function addSavedPlaylist(title, playlist, loc) {
     return dispatch(clearSelected());
   }
 }
-
-// export function getLocation() {
-//   console.log('start');
-//   return function(dispatch) {
-//     return navigator.geolocation.getCurrentPosition(function(position) {
-//       dispatch(addLocation(position));
-//     })
-//   }
-// }
-
-// fireBaseRef.on('value', function(snapshot) {
-//   state.saved = snapshot.val().saved
-// }, function(errorObject) {
-//   console.log('Failure to retrieve data');
-// });

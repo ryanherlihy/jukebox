@@ -1,7 +1,5 @@
-
-
 const INITIAL_STATE = {
-  currentLocation: {},
+  currentLocation: null,
   results: [],
   selected: {
     playlist: []
@@ -12,7 +10,6 @@ const INITIAL_STATE = {
 };
 
 export default function(state = INITIAL_STATE, action) {
-
 
   switch (action.type) {
     case 'INIT_SAVED':

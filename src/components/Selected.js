@@ -7,7 +7,7 @@ class Selected extends Component {
       this.props.addSavedPlaylist(
         this.playlistTitle.value,
         this.props.selected.playlist,
-        this.loc
+        this.props.loc
       );
     } else {
       alert('You must enter a title for the playlist');

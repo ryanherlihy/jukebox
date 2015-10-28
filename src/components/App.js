@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 
-import {getLocation} from '../actions/jukeActions';
+import {addLocation} from '../actions/jukeActions';
 
 import Navigation from './Navigation';
 
 class App extends Component {
   componentDidMount() {
-    // getLocation();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        addLocation(position);
+      }, function() {
+        console.log('Error getting location.');
+      });
+    }
   }
 
   render() {

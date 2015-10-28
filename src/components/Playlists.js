@@ -19,7 +19,13 @@ class Playlists extends Component {
   render() {
     let playlists = [];
     let empty;
-    if (!this.props.playlists || this.props.playlists.length === 0) {
+    if (!this.props.playlists) {
+      empty = (
+        <div className="progress">
+          <div className="indeterminate"></div>
+        </div>
+      );
+    } else if (this.props.playlists.length === 0) {
       empty = <p>No playlists available</p>;
     } else {
       playlists = Object.keys(this.props.playlists).map((key, index) => {
