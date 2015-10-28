@@ -16,6 +16,18 @@ class Playlists extends Component {
     });
   }
 
+  isPlaylistInRange(coords, currentLocation) {
+    console.log('prop', this.props);
+    let latDiff = Math.abs(currentLocation.coords.latitude - coords.lat);
+    let lngDiff = Math.abs(currentLocation.coords.longitude - coords.lng);
+    console.log(latDiff, lngDiff);
+    if (latDiff < 0.0001 && lngDiff < 0.0001) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     let playlists = [];
     let empty;
@@ -29,12 +41,14 @@ class Playlists extends Component {
       empty = <p>No playlists available</p>;
     } else {
       playlists = Object.keys(this.props.playlists).map((key, index) => {
-        return (
-          <PlaylistItem
-            key={index}
-            playlist={this.props.playlists[key]}
-            addCurrentPlaylist={this.props.addCurrentPlaylist} />
-        )
+        if (this.isPlaylistInRange(this.props.playlists[key].coords, this.props.currentLocation)) {
+          return (
+            <PlaylistItem
+              key={index}
+              playlist={this.props.playlists[key]}
+              addCurrentPlaylist={this.props.addCurrentPlaylist} />
+          )
+        }
       })
     }
 
@@ -60,7 +74,6 @@ class Playlists extends Component {
           </div>
         </div>
       );
-
     }
 
     return (
@@ -89,7 +102,8 @@ class Playlists extends Component {
 function mapStateToProps(state) {
   return {
     playlists: state.saved,
-    currentPlaylist: state.currentPlaylist
+    currentPlaylist: state.currentPlaylist,
+    currentLocation: state.currentLocation
   }
 }
 

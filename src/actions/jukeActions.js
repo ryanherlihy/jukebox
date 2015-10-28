@@ -48,7 +48,6 @@ export function addLocation(location) {
     type: 'ADD_LOCATION',
     location
   }
-  console.log(location);
 }
 
 export function fetchTracks(query) {
@@ -66,6 +65,14 @@ export function fetchTracks(query) {
   }
 }
 
+export function fetchLocation() {
+  return function(dispatch) {
+    return navigator.geolocation.getCurrentPosition(function(position) {
+      dispatch(addLocation(position));
+    });
+  }
+}
+
 export function fetchPlaylists() {
   return function(dispatch) {
     return fireBaseRef.once('value', function(snapshot) {
@@ -75,11 +82,14 @@ export function fetchPlaylists() {
 }
 
 export function addSavedPlaylist(title, playlist, loc) {
-  console.log(loc);
+  console.log('loc', loc.coords);
   return function(dispatch) {
     savedPlaylistsRef.push({
       title: title,
-      loc: loc ? loc : {},
+      coords: {
+        lat: loc.coords.latitude,
+        lng: loc.coords.longitude
+      },
       playlist: playlist
     });
     return dispatch(clearSelected());

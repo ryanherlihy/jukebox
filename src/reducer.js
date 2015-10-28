@@ -12,6 +12,11 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
 
   switch (action.type) {
+    case 'ADD_LOCATION':
+      console.log('Location', action.location);
+      return Object.assign({}, state, {
+        currentLocation: action.location
+      });
     case 'INIT_SAVED':
       return Object.assign({}, state, {
         saved: action.saved
@@ -38,14 +43,11 @@ export default function(state = INITIAL_STATE, action) {
         currentPlaylist: action.playlist
       });
     case 'CLEAR_SELECTED':
-      return Object.assign({
+      return Object.assign({}, state, {
+        results: [],
         selected: {
           playlist: []
         }
-      });
-    case 'ADD_LOCATION':
-      return Object.assign({
-        currentLocation: action.location
       });
   }
   return state;

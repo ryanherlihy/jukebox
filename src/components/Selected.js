@@ -7,7 +7,7 @@ class Selected extends Component {
       this.props.addSavedPlaylist(
         this.playlistTitle.value,
         this.props.selected.playlist,
-        this.props.loc
+        this.props.currentLocation
       );
     } else {
       alert('You must enter a title for the playlist');
@@ -16,7 +16,6 @@ class Selected extends Component {
   }
 
   render() {
-    console.log(this.props);
     let selected = this.props.selected.playlist.map((item, index) => {
       return (
         <li key={index}>

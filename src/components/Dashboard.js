@@ -11,6 +11,9 @@ import Heading from './Heading';
 
 class Dashboard extends Component {
   componentDidMount() {
+    // if (navigator.geolocation && !this.props.currentLocation) {
+    //   this.props.fetchLocation();
+    // }
   }
 
   render() {
@@ -26,7 +29,7 @@ class Dashboard extends Component {
       rightContent = (
         <Selected
           selected={this.props.selected}
-          loc={this.props.currentLocation}
+          currentLocation={this.props.currentLocation}
           addSavedPlaylist={this.props.addSavedPlaylist} />
       )
     }
@@ -58,7 +61,8 @@ function mapStateToProps(state) {
     results: state.results,
     selected: state.selected,
     saved: state.saved,
-    currentTrack: state.currentTrack
+    currentTrack: state.currentTrack,
+    currentLocation: state.currentLocation
   };
 }
 

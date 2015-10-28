@@ -24610,6 +24610,11 @@
 	  if (state === undefined) state = INITIAL_STATE;
 
 	  switch (action.type) {
+	    case 'ADD_LOCATION':
+	      console.log('Location', action.location);
+	      return Object.assign({}, state, {
+	        currentLocation: action.location
+	      });
 	    case 'INIT_SAVED':
 	      return Object.assign({}, state, {
 	        saved: action.saved
@@ -24634,14 +24639,11 @@
 	        currentPlaylist: action.playlist
 	      });
 	    case 'CLEAR_SELECTED':
-	      return Object.assign({
+	      return Object.assign({}, state, {
+	        results: [],
 	        selected: {
 	          playlist: []
 	        }
-	      });
-	    case 'ADD_LOCATION':
-	      return Object.assign({
-	        currentLocation: action.location
 	      });
 	  }
 	  return state;
@@ -25322,6 +25324,8 @@
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -25332,7 +25336,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(215);
+
 	var _actionsJukeActions = __webpack_require__(226);
+
+	var jukeActions = _interopRequireWildcard(_actionsJukeActions);
 
 	var _Navigation = __webpack_require__(228);
 
@@ -25350,12 +25358,8 @@
 	  _createClass(App, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      if (navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(function (position) {
-	          (0, _actionsJukeActions.addLocation)(position);
-	        }, function () {
-	          console.log('Error getting location.');
-	        });
+	      if (navigator.geolocation && !this.props.currentLocation) {
+	        this.props.fetchLocation();
 	      }
 	    }
 	  }, {
@@ -25373,7 +25377,11 @@
 	  return App;
 	})(_react.Component);
 
-	exports['default'] = App;
+	function mapStateToProps(state) {
+	  return state;
+	}
+
+	exports['default'] = (0, _reactRedux.connect)(mapStateToProps, jukeActions)(App);
 	module.exports = exports['default'];
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/ryanherlihy/school/hackumass/ryan-bluemix-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "App.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -25397,6 +25405,7 @@
 	exports.clearSelected = clearSelected;
 	exports.addLocation = addLocation;
 	exports.fetchTracks = fetchTracks;
+	exports.fetchLocation = fetchLocation;
 	exports.fetchPlaylists = fetchPlaylists;
 	exports.addSavedPlaylist = addSavedPlaylist;
 
@@ -25454,7 +25463,6 @@
 	    type: 'ADD_LOCATION',
 	    location: location
 	  };
-	  console.log(location);
 	}
 
 	function fetchTracks(query) {
@@ -25472,6 +25480,14 @@
 	  };
 	}
 
+	function fetchLocation() {
+	  return function (dispatch) {
+	    return navigator.geolocation.getCurrentPosition(function (position) {
+	      dispatch(addLocation(position));
+	    });
+	  };
+	}
+
 	function fetchPlaylists() {
 	  return function (dispatch) {
 	    return fireBaseRef.once('value', function (snapshot) {
@@ -25481,11 +25497,14 @@
 	}
 
 	function addSavedPlaylist(title, playlist, loc) {
-	  console.log(loc);
+	  console.log('loc', loc.coords);
 	  return function (dispatch) {
 	    savedPlaylistsRef.push({
 	      title: title,
-	      loc: loc ? loc : {},
+	      coords: {
+	        lat: loc.coords.latitude,
+	        lng: loc.coords.longitude
+	      },
 	      playlist: playlist
 	    });
 	    return dispatch(clearSelected());
@@ -25907,7 +25926,11 @@
 
 	  _createClass(Dashboard, [{
 	    key: 'componentDidMount',
-	    value: function componentDidMount() {}
+	    value: function componentDidMount() {
+	      // if (navigator.geolocation && !this.props.currentLocation) {
+	      //   this.props.fetchLocation();
+	      // }
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -25920,7 +25943,7 @@
 	      } else {
 	        rightContent = _react2['default'].createElement(_Selected2['default'], {
 	          selected: this.props.selected,
-	          loc: this.props.currentLocation,
+	          currentLocation: this.props.currentLocation,
 	          addSavedPlaylist: this.props.addSavedPlaylist });
 	      }
 
@@ -25960,7 +25983,8 @@
 	    results: state.results,
 	    selected: state.selected,
 	    saved: state.saved,
-	    currentTrack: state.currentTrack
+	    currentTrack: state.currentTrack,
+	    currentLocation: state.currentLocation
 	  };
 	}
 
@@ -26229,7 +26253,7 @@
 	    key: 'handleAddSavedPlaylist',
 	    value: function handleAddSavedPlaylist() {
 	      if (this.playlistTitle.value) {
-	        this.props.addSavedPlaylist(this.playlistTitle.value, this.props.selected.playlist, this.props.loc);
+	        this.props.addSavedPlaylist(this.playlistTitle.value, this.props.selected.playlist, this.props.currentLocation);
 	      } else {
 	        alert('You must enter a title for the playlist');
 	      }
@@ -26240,7 +26264,6 @@
 	    value: function render() {
 	      var _this = this;
 
-	      console.log(this.props);
 	      var selected = this.props.selected.playlist.map(function (item, index) {
 	        return _react2['default'].createElement(
 	          'li',
@@ -26554,6 +26577,19 @@
 	      });
 	    }
 	  }, {
+	    key: 'isPlaylistInRange',
+	    value: function isPlaylistInRange(coords, currentLocation) {
+	      console.log('prop', this.props);
+	      var latDiff = Math.abs(currentLocation.coords.latitude - coords.lat);
+	      var lngDiff = Math.abs(currentLocation.coords.longitude - coords.lng);
+	      console.log(latDiff, lngDiff);
+	      if (latDiff < 0.0001 && lngDiff < 0.0001) {
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this = this;
@@ -26574,10 +26610,12 @@
 	        );
 	      } else {
 	        playlists = Object.keys(this.props.playlists).map(function (key, index) {
-	          return _react2['default'].createElement(_PlaylistItem2['default'], {
-	            key: index,
-	            playlist: _this.props.playlists[key],
-	            addCurrentPlaylist: _this.props.addCurrentPlaylist });
+	          if (_this.isPlaylistInRange(_this.props.playlists[key].coords, _this.props.currentLocation)) {
+	            return _react2['default'].createElement(_PlaylistItem2['default'], {
+	              key: index,
+	              playlist: _this.props.playlists[key],
+	              addCurrentPlaylist: _this.props.addCurrentPlaylist });
+	          }
 	        });
 	      }
 
@@ -26664,7 +26702,8 @@
 	function mapStateToProps(state) {
 	  return {
 	    playlists: state.saved,
-	    currentPlaylist: state.currentPlaylist
+	    currentPlaylist: state.currentPlaylist,
+	    currentLocation: state.currentLocation
 	  };
 	}
 
