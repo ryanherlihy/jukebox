@@ -8,6 +8,12 @@ import PlaylistItem from './PlaylistItem';
 import TrackPreview from './TrackPreview';
 
 class Playlists extends Component {
+  constructor() {
+    super();
+
+    this.previewOpen = false;
+  }
+
   componentDidMount() {
     this.props.fetchPlaylists();
 
@@ -16,11 +22,15 @@ class Playlists extends Component {
     });
   }
 
+  openPreview() {
+    this.previewOpen = !this.previewOpen;
+    console.log(this.previewOpen);
+  }
+
   isPlaylistInRange(coords, currentLocation) {
-    console.log('prop', this.props);
     let latDiff = Math.abs(currentLocation.coords.latitude - coords.lat);
     let lngDiff = Math.abs(currentLocation.coords.longitude - coords.lng);
-    console.log(latDiff, lngDiff);
+
     if (latDiff < 0.0001 && lngDiff < 0.0001) {
       return true;
     } else {
@@ -32,6 +42,12 @@ class Playlists extends Component {
     let playlists = [];
     let empty;
     if (!this.props.playlists) {
+      empty = (
+        <div className="progress">
+          <div className="indeterminate"></div>
+        </div>
+      );
+    } else if (!this.props.currentLocation) {
       empty = (
         <div className="progress">
           <div className="indeterminate"></div>
@@ -53,7 +69,7 @@ class Playlists extends Component {
     }
 
     let rightContent;
-    if (this.props.currentPlaylist) {
+    if (this.previewOpen) {
       rightContent = (
         <div className='card'>
           <div className='card-content'>
@@ -82,9 +98,9 @@ class Playlists extends Component {
           <div className='col m6 s12'>
             <div className='card'>
               <div className='card-content'>
-                <h5>Created Playlists</h5>
+                <h5>Open Playlists</h5>
                 {empty}
-                <ul className='collection'>
+                <ul className='collection' onClick={this.openPreview.bind(this)}>
                   {playlists}
                 </ul>
               </div>

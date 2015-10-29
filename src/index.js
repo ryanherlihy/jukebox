@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import App from './components/App';
 import {DashboardContainer} from './components/Dashboard';
 import {PlaylistsContainer} from './components/Playlists';
+import Login from './components/Login';
 
 import thunkMiddleWare from 'redux-thunk';
 
@@ -24,7 +25,8 @@ ReactDOM.render(
     <Provider store={store}>
       <Router>
         <Route path="/" component={App}>
-          <IndexRoute component={DashboardContainer} />
+          <IndexRoute component={Login} />
+          <Route path='dashboard' component={DashboardContainer} />
           <Route path='playlists' component={PlaylistsContainer} />
         </Route>
       </Router>
