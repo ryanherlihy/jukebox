@@ -25502,7 +25502,6 @@
 	}
 
 	function addSavedPlaylist(title, playlist, loc) {
-	  console.log('loc', loc.coords);
 	  return function (dispatch) {
 	    savedPlaylistsRef.push({
 	      title: title,
@@ -26620,12 +26619,6 @@
 	          { className: 'progress' },
 	          _react2['default'].createElement('div', { className: 'indeterminate' })
 	        );
-	      } else if (this.props.playlists.length === 0) {
-	        empty = _react2['default'].createElement(
-	          'p',
-	          null,
-	          'No playlists available'
-	        );
 	      } else {
 	        playlists = Object.keys(this.props.playlists).map(function (key, index) {
 	          if (_this.isPlaylistInRange(_this.props.playlists[key].coords, _this.props.currentLocation)) {
@@ -26634,7 +26627,15 @@
 	              playlist: _this.props.playlists[key],
 	              addCurrentPlaylist: _this.props.addCurrentPlaylist });
 	          }
+	        }).filter(function (item) {
+	          if (item) {
+	            return true;
+	          }
 	        });
+	        console.log(playlists);
+	        if (!playlists) {
+	          console.log('empty');
+	        }
 	      }
 
 	      var rightContent = undefined;

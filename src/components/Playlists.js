@@ -53,8 +53,6 @@ class Playlists extends Component {
           <div className="indeterminate"></div>
         </div>
       );
-    } else if (this.props.playlists.length === 0) {
-      empty = <p>No playlists available</p>;
     } else {
       playlists = Object.keys(this.props.playlists).map((key, index) => {
         if (this.isPlaylistInRange(this.props.playlists[key].coords, this.props.currentLocation)) {
@@ -65,7 +63,14 @@ class Playlists extends Component {
               addCurrentPlaylist={this.props.addCurrentPlaylist} />
           )
         }
-      })
+      }).filter((item) => {
+        if (item) {
+          return true;
+        }
+      });
+      if (!playlists) {
+        console.log('empty');
+      }
     }
 
     let rightContent;

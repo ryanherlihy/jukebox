@@ -82,7 +82,6 @@ export function fetchPlaylists() {
 }
 
 export function addSavedPlaylist(title, playlist, loc) {
-  console.log('loc', loc.coords);
   return function(dispatch) {
     savedPlaylistsRef.push({
       title: title,
